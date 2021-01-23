@@ -1,18 +1,24 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 
-import 'normalize.css/normalize.css' // A modern alternative to CSS resets
-
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/en' // lang i18n
-
+import App from '@/App.vue'
+// style
+import 'normalize.css/normalize.css' // a modern alternative to CSS resets
 import '@/styles/index.scss' // global css
 
-import App from './App'
-import store from './store'
-import router from './router'
+// import bootstrap from './core/bootstrap'
 
-import '@/icons' // icon
+// use lazy load element-plus
+import loadElementPlus from '@/core/lazy_use'
+// use components
+import loadComponents from '@/core/use'
+// icon
+import '@/icons'
+
+// vue router
+import router from '@/router'
+// vue vuex
+import store from '@/store'
+
 import '@/permission' // permission control
 
 /**
@@ -28,16 +34,12 @@ if (process.env.NODE_ENV === 'production') {
   mockXHR()
 }
 
-// set ElementUI lang to EN
-Vue.use(ElementUI, { locale })
-// 如果想要中文版 element-ui，按如下方式声明
-// Vue.use(ElementUI)
+const app = createApp(App)
 
-Vue.config.productionTip = false
+loadElementPlus(app)
+loadComponents(app)
 
-new Vue({
-  el: '#app',
-  router,
-  store,
-  render: h => h(App)
-})
+// element-plus config
+app.config.globalProperties.$ELEMENT = { size: 'small', zIndex: 3000 }
+
+app.use(router).use(store).mount('#app')

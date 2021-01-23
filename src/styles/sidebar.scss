@@ -60,6 +60,9 @@
     .sub-el-icon {
       margin-right: 12px;
       margin-left: -2px;
+      color: currentColor;
+      width: 1em;
+      height: 1em;
     }
 
     .el-menu {
@@ -74,6 +77,9 @@
       &:hover {
         background-color: $menuHover !important;
       }
+    }
+    .el-menu-item:hover, .el-menu-item:focus {
+      background-color: $subMenuBg !important;
     }
 
     .is-active>.el-submenu__title {
@@ -207,7 +213,7 @@
 
   // the scroll bar appears when the subMenu is too long
   >.el-menu--popup {
-    max-height: 100vh;
+    max-height: 90vh;
     overflow-y: auto;
 
     &::-webkit-scrollbar-track-piece {

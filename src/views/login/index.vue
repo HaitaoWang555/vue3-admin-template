@@ -1,7 +1,13 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-
+    <el-form
+      ref="loginForm"
+      :model="formParams"
+      :rules="loginRules"
+      class="login-form"
+      auto-complete="on"
+      label-position="left"
+    >
       <div class="title-container">
         <h3 class="title">Login Form</h3>
       </div>
@@ -12,7 +18,7 @@
         </span>
         <el-input
           ref="username"
-          v-model="loginForm.username"
+          v-model="formParams.username"
           placeholder="Username"
           name="username"
           type="text"
@@ -28,36 +34,45 @@
         <el-input
           :key="passwordType"
           ref="password"
-          v-model="loginForm.password"
+          v-model="formParams.password"
           :type="passwordType"
           placeholder="Password"
           name="password"
           tabindex="2"
           auto-complete="on"
-          @keyup.enter.native="handleLogin"
+          @keyup.enter="handleLogin"
         />
         <span class="show-pwd" @click="showPwd">
-          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+          <svg-icon
+            :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
+          />
         </span>
       </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+      <el-button
+        :loading="loading"
+        type="primary"
+        style="width: 100%; margin-bottom: 30px"
+        @click="handleLogin"
+        >Login</el-button
+      >
 
       <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
+        <span style="margin-right: 20px">username: admin</span>
         <span> password: any</span>
       </div>
-
     </el-form>
   </div>
 </template>
 
 <script>
 import { validUsername } from '@/utils/validate'
-
+import { reactive, ref, toRaw, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 export default {
   name: 'Login',
-  data() {
+  setup() {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
         callback(new Error('Please enter the correct user name'))
@@ -72,56 +87,78 @@ export default {
         callback()
       }
     }
-    return {
-      loginForm: {
-        username: 'admin',
-        password: '111111'
+
+    const router = useRouter()
+    const route = useRoute()
+    const store = useStore()
+
+    const password = ref(null)
+    const loginForm = ref(null)
+
+    const redirect = ref(null)
+    const passwordType = ref('password')
+    const loading = ref(false)
+    const loginRules = reactive({
+      username: [
+        { required: true, trigger: 'blur', validator: validateUsername },
+      ],
+      password: [
+        { required: true, trigger: 'blur', validator: validatePassword },
+      ],
+    })
+    const formParams = reactive({
+      username: 'admin',
+      password: '111111',
+    })
+
+    watch(
+      route,
+      () => {
+        redirect.value = route.query && route.query.redirect
       },
-      loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
-      },
-      loading: false,
-      passwordType: 'password',
-      redirect: undefined
-    }
-  },
-  watch: {
-    $route: {
-      handler: function(route) {
-        this.redirect = route.query && route.query.redirect
-      },
-      immediate: true
-    }
-  },
-  methods: {
-    showPwd() {
-      if (this.passwordType === 'password') {
-        this.passwordType = ''
+      { immediate: true }
+    )
+
+    const showPwd = () => {
+      if (passwordType.value === 'password') {
+        passwordType.value = ''
       } else {
-        this.passwordType = 'password'
+        passwordType.value = 'password'
       }
-      this.$nextTick(() => {
-        this.$refs.password.focus()
-      })
-    },
-    handleLogin() {
-      this.$refs.loginForm.validate(valid => {
+      password.value.focus()
+    }
+    const handleLogin = () => {
+      loginForm.value.validate((valid) => {
         if (valid) {
-          this.loading = true
-          this.$store.dispatch('user/login', this.loginForm).then(() => {
-            this.$router.push({ path: this.redirect || '/' })
-            this.loading = false
-          }).catch(() => {
-            this.loading = false
-          })
+          loading.value = true
+          store
+            .dispatch('user/login', toRaw(formParams))
+            .then(() => {
+              router.push({ path: redirect.value || '/' })
+              loading.value = false
+            })
+            .catch(() => {
+              loading.value = false
+            })
         } else {
           console.log('error submit!!')
           return false
         }
       })
     }
-  }
+
+    return {
+      loginForm,
+      password,
+      formParams,
+      loginRules,
+      loading,
+      passwordType,
+      redirect,
+      showPwd,
+      handleLogin,
+    }
+  },
 }
 </script>
 
@@ -129,8 +166,8 @@ export default {
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
-$bg:#283443;
-$light_gray:#fff;
+$bg: #283443;
+$light_gray: #fff;
 $cursor: #fff;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
@@ -173,9 +210,9 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
-$bg:#2d3a4b;
-$dark_gray:#889aa4;
-$light_gray:#eee;
+$bg: #2d3a4b;
+$dark_gray: #889aa4;
+$light_gray: #eee;
 
 .login-container {
   min-height: 100%;

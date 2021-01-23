@@ -5,15 +5,18 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
   name: 'Dashboard',
-  computed: {
-    ...mapGetters([
-      'name'
-    ])
-  }
+  setup() {
+    const store = useStore()
+
+    return {
+      name: computed(() => store.getters.name),
+    }
+  },
 }
 </script>
 
