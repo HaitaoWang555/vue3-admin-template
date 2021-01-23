@@ -2,9 +2,11 @@
   "name": "vue-admin-template",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://HaitaoWang555.github.io/vue3-admin-template",
   "scripts": {
     "dev": "vue-cli-service serve",
     "build:prod": "vue-cli-service build",
+    "preview": "node build/index.js --preview",
     "build:stage": "vue-cli-service build --mode staging",
     "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml",
     "lint": "vue-cli-service lint"
@@ -32,6 +34,7 @@
     "babel-eslint": "^10.1.0",
     "babel-plugin-component": "^1.1.1",
     "chalk": "^4.1.0",
+    "connect": "^3.7.0",
     "eslint": "^7.16.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-html": "^6.1.1",
