@@ -5,13 +5,13 @@ English | [简体中文](./README-zh.md)
 > A minimal vue admin template with Element UI & axios & iconfont & permission control & lint
 
 **Live demo:** https://HaitaoWang555.github.io/vue3-admin-template
-
+**Live demo:** http://wanghaitao555.gitee.io/vue3-admin-template
 
 ## Build Setup
 
 ```bash
 # clone the project
-git clone https://github.com/PanJiaChen/vue-admin-template.git
+git clone https://github.com/HaitaoWang555/vue3-admin-template.git
 
 # enter the project directory
 cd vue-admin-template
