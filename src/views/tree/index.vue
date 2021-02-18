@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { ref, reactive, watch } from 'vue'
+import { ref, reactive, watchEffect } from 'vue'
 export default {
   name: 'TreeExample',
   setup() {
@@ -85,7 +85,8 @@ export default {
       if (!value) return true
       return data.label.indexOf(value) !== -1
     }
-    watch(filterText, () => {
+    watchEffect(() => {
+      if (!tree.value) return
       tree.value.filter(filterText.value)
     })
     return {

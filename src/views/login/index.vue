@@ -67,7 +67,7 @@
 
 <script>
 import { validUsername } from '@/utils/validate'
-import { reactive, ref, toRaw, watch } from 'vue'
+import { reactive, ref, toRaw } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 export default {
@@ -95,7 +95,6 @@ export default {
     const password = ref(null)
     const loginForm = ref(null)
 
-    const redirect = ref(null)
     const passwordType = ref('password')
     const loading = ref(false)
     const loginRules = reactive({
@@ -110,14 +109,6 @@ export default {
       username: 'admin',
       password: '111111',
     })
-
-    watch(
-      route,
-      () => {
-        redirect.value = route.query && route.query.redirect
-      },
-      { immediate: true }
-    )
 
     const showPwd = () => {
       if (passwordType.value === 'password') {
@@ -134,7 +125,9 @@ export default {
           store
             .dispatch('user/login', toRaw(formParams))
             .then(() => {
-              router.push({ path: redirect.value || '/' })
+              const redirect = route.query && route.query.redirect
+
+              router.push({ path: redirect || '/' })
               loading.value = false
             })
             .catch(() => {
@@ -154,7 +147,6 @@ export default {
       loginRules,
       loading,
       passwordType,
-      redirect,
       showPwd,
       handleLogin,
     }

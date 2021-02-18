@@ -18,7 +18,7 @@
 <script>
 import { computed } from 'vue'
 import { Navbar, Sidebar, AppMain } from './components'
-import ResizeMixin from './mixin/ResizeHandler'
+import { useResizeHandler } from './mixin/ResizeHandler'
 import { useStore } from 'vuex'
 
 export default {
@@ -28,8 +28,8 @@ export default {
     Sidebar,
     AppMain,
   },
-  mixins: [ResizeMixin],
   setup() {
+    useResizeHandler()
     const store = useStore()
 
     const sidebar = computed(() => store.state.app.sidebar)

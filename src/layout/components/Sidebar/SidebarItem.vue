@@ -52,13 +52,12 @@ import path from 'path'
 import { isExternal } from '@/utils/validate'
 import Item from './Item'
 import AppLink from './Link'
-import FixiOSBug from './FixiOSBug'
+import { useFixBug } from './FixiOSBug'
 import { ref } from 'vue'
 
 export default {
   name: 'SidebarItem',
   components: { Item, AppLink },
-  mixins: [FixiOSBug],
   props: {
     // route object
     item: {
@@ -76,6 +75,8 @@ export default {
   },
   setup(props) {
     const onlyOneChild = ref(null)
+
+    const subMenu = useFixBug()
 
     const hasOneShowingChild = (children = [], parent) => {
       const showingChildren = children.filter((item) => {
@@ -113,6 +114,7 @@ export default {
     }
 
     return {
+      subMenu,
       onlyOneChild,
       hasOneShowingChild,
       resolvePath,
