@@ -7,6 +7,10 @@ English | [简体中文](./README-zh.md)
 **Live demo:** https://HaitaoWang555.github.io/vue3-admin-template
 **Live demo:** http://wanghaitao555.gitee.io/vue3-admin-template
 
+**Pro Live demo:** https://haitaowang555.github.io/vue3-admin-pro
+**Pro Live demo:** https://wanghaitao555.gitee.io/vue3-admin-pro
+
+
 ## Build Setup
 
 ```bash
