@@ -55,6 +55,21 @@ const constantRoutes = [
       },
     ],
   },
+  {
+    path: '/tailwindcss',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Tailwindcss',
+        component: () =>
+          import(
+            /* webpackChunkName: "tailwindcss" */ '@/views/tailwindcss/index'
+          ),
+        meta: { title: 'Tailwindcss', icon: 'el-icon-magic-stick' },
+      },
+    ],
+  },
 
   {
     path: '/nested',
@@ -153,7 +168,7 @@ const constantRoutes = [
     component: () => import('@/views/404'),
     hidden: true,
   },
-  { path: '/*', redirect: '/404', hidden: true },
+  { path: '/:pathMatch(.*)*', redirect: '/404', hidden: true },
 ]
 
 const history = createWebHashHistory()
