@@ -1,7 +1,8 @@
 'use strict'
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
-
+const Components = require('unplugin-vue-components/webpack')
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
@@ -50,6 +51,11 @@ module.exports = {
         '@': resolve('src'),
       },
     },
+    plugins: [
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
+    ],
   },
   chainWebpack(config) {
     // it can improve the speed of the first screen, it is recommended to turn on preload
