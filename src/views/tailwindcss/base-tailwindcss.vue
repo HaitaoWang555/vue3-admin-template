@@ -105,15 +105,3 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'tailwindcss',
-  components: {},
-  data() {
-    return {}
-  },
-}
-</script>
-
-<style rel="stylesheet/scss" lang="scss" scoped></style>

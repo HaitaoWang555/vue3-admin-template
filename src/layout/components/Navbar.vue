@@ -1,12 +1,34 @@
+<script setup>
+import { useStore } from 'vuex'
+import Breadcrumb from '@/components/Breadcrumb/base-breadcrumb.vue'
+import Hamburger from '@/components/Hamburger/base-hamburger.vue'
+import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
+const store = useStore()
+const router = useRouter()
+const route = useRoute()
+
+const sidebar = computed(() => store.getters.sidebar)
+const avatar = computed(() => store.getters.avatar)
+
+const toggleSideBar = () => {
+  store.dispatch('app/toggleSideBar')
+}
+const logout = async () => {
+  await store.dispatch('user/logout')
+  router.push(`/login?redirect=${route.fullPath}`)
+}
+</script>
 <template>
   <div class="navbar">
-    <hamburger
+    <Hamburger
       :is-active="sidebar.opened"
       class="hamburger-container"
-      @toggleClick="toggleSideBar"
+      @toggle-click="toggleSideBar"
     />
 
-    <breadcrumb class="breadcrumb-container" />
+    <Breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
@@ -40,44 +62,6 @@
     </div>
   </div>
 </template>
-
-<script>
-import { useStore } from 'vuex'
-import Breadcrumb from '@/components/Breadcrumb'
-import Hamburger from '@/components/Hamburger'
-import { computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-
-export default {
-  components: {
-    Breadcrumb,
-    Hamburger,
-  },
-  setup() {
-    const store = useStore()
-    const router = useRouter()
-    const route = useRoute()
-
-    const sidebar = computed(() => store.getters.sidebar)
-    const avatar = computed(() => store.getters.avatar)
-
-    const toggleSideBar = () => {
-      store.dispatch('app/toggleSideBar')
-    }
-    const logout = async () => {
-      await store.dispatch('user/logout')
-      router.push(`/login?redirect=${route.fullPath}`)
-    }
-
-    return {
-      sidebar,
-      avatar,
-      toggleSideBar,
-      logout,
-    }
-  },
-}
-</script>
 
 <style lang="scss" scoped>
 .navbar {

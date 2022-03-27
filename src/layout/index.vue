@@ -1,3 +1,29 @@
+<script setup>
+import { computed } from 'vue'
+import { Navbar, Sidebar, AppMain } from './components'
+import { useResizeHandler } from './mixin/ResizeHandler'
+import { useStore } from 'vuex'
+
+useResizeHandler()
+const store = useStore()
+
+const sidebar = computed(() => store.state.app.sidebar)
+const device = computed(() => store.state.app.device)
+const fixedHeader = computed(() => store.state.settings.fixedHeader)
+
+const classObj = computed(() => {
+  return {
+    hideSidebar: !sidebar.value.opened,
+    openSidebar: sidebar.value.opened,
+    withoutAnimation: sidebar.value.withoutAnimation,
+    mobile: device.value === 'mobile',
+  }
+})
+
+const handleClickOutside = () => {
+  store.dispatch('app/closeSideBar', { withoutAnimation: false })
+}
+</script>
 <template>
   <div :class="classObj" class="app-wrapper">
     <div
@@ -8,57 +34,12 @@
     <Sidebar class="sidebar-container" />
     <div class="main-container">
       <div :class="{ 'fixed-header': fixedHeader }">
-        <navbar />
+        <Navbar />
       </div>
-      <app-main />
+      <AppMain />
     </div>
   </div>
 </template>
-
-<script>
-import { computed } from 'vue'
-import { Navbar, Sidebar, AppMain } from './components'
-import { useResizeHandler } from './mixin/ResizeHandler'
-import { useStore } from 'vuex'
-
-export default {
-  name: 'Layout',
-  components: {
-    Navbar,
-    Sidebar,
-    AppMain,
-  },
-  setup() {
-    useResizeHandler()
-    const store = useStore()
-
-    const sidebar = computed(() => store.state.app.sidebar)
-    const device = computed(() => store.state.app.device)
-    const fixedHeader = computed(() => store.state.settings.fixedHeader)
-
-    const classObj = computed(() => {
-      return {
-        hideSidebar: !sidebar.value.opened,
-        openSidebar: sidebar.value.opened,
-        withoutAnimation: sidebar.value.withoutAnimation,
-        mobile: device.value === 'mobile',
-      }
-    })
-
-    const handleClickOutside = () => {
-      store.dispatch('app/closeSideBar', { withoutAnimation: false })
-    }
-
-    return {
-      sidebar,
-      device,
-      fixedHeader,
-      classObj,
-      handleClickOutside,
-    }
-  },
-}
-</script>
 
 <style lang="scss" scoped>
 @import '~@/styles/mixin.scss';

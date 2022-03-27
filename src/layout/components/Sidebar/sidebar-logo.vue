@@ -1,3 +1,17 @@
+<script setup>
+import { ref } from 'vue'
+defineProps({
+  collapse: {
+    type: Boolean,
+    required: true,
+  },
+})
+
+const title = ref('Vue Admin Template')
+const logo = ref(
+  'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+)
+</script>
 <template>
   <div class="sidebar-logo-container" :class="{ collapse: collapse }">
     <transition name="sidebarLogoFade">
@@ -17,30 +31,6 @@
     </transition>
   </div>
 </template>
-
-<script>
-import { ref } from 'vue'
-export default {
-  name: 'SidebarLogo',
-  props: {
-    collapse: {
-      type: Boolean,
-      required: true,
-    },
-  },
-  setup() {
-    const title = ref('Vue Admin Template')
-    const logo = ref(
-      'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
-    )
-
-    return {
-      title,
-      logo,
-    }
-  },
-}
-</script>
 
 <style lang="scss" scoped>
 .sidebarLogoFade-enter-active {

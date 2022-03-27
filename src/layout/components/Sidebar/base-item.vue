@@ -1,3 +1,15 @@
+<script setup>
+defineProps({
+  icon: {
+    type: String,
+    default: '',
+  },
+  title: {
+    type: String,
+    default: '',
+  },
+})
+</script>
 <template>
   <template v-if="icon">
     <el-icon v-if="icon.includes('el-icon')" class="sub-el-icon">
@@ -7,19 +19,3 @@
   </template>
   <span v-if="title">{{ title }}</span>
 </template>
-
-<script>
-export default {
-  name: 'MenuItem',
-  props: {
-    icon: {
-      type: String,
-      default: '',
-    },
-    title: {
-      type: String,
-      default: '',
-    },
-  },
-}
-</script>

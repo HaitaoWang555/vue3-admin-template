@@ -1,6 +1,6 @@
 // use components
-import SvgIcon from '@/components/SvgIcon' // svg component
+import SvgIcon from '@/components/SvgIcon/base-svg-icon.vue' // svg component
 
 export default (app) => {
-  app.component('svg-icon', SvgIcon)
+  app.component('SvgIcon', SvgIcon)
 }

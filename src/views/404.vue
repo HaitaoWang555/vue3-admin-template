@@ -1,3 +1,11 @@
+<script setup>
+defineProps({
+  message: {
+    type: String,
+    default: 'The webmaster said that you can not enter this page...',
+  },
+})
+</script>
 <template>
   <div class="wscn-http404-container">
     <div class="wscn-http404">
@@ -44,18 +52,6 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'Page404',
-  props: {
-    message: {
-      type: String,
-      default: 'The webmaster said that you can not enter this page...',
-    },
-  },
-}
-</script>
 
 <style lang="scss" scoped>
 .wscn-http404-container {

@@ -1,3 +1,30 @@
+<script setup>
+import { ElMessage } from 'element-plus'
+import { reactive, toRaw } from 'vue'
+
+const form = reactive({
+  name: '',
+  region: '',
+  date1: '',
+  date2: '',
+  delivery: false,
+  type: [],
+  resource: '',
+  desc: '',
+})
+
+const onSubmit = () => {
+  const { name } = form
+  console.log(name)
+  console.log(toRaw(form))
+
+  ElMessage('submit!')
+}
+const onCancel = () => {
+  ElMessage({ message: 'cancel!', type: 'warning' })
+}
+</script>
+
 <template>
   <div class="app-container">
     <el-form :model="form" label-width="120px">
@@ -56,44 +83,6 @@
     </el-form>
   </div>
 </template>
-
-<script>
-import { ElMessage } from 'element-plus'
-import { reactive, toRaw } from 'vue'
-
-export default {
-  name: 'Form',
-  setup() {
-    const form = reactive({
-      name: '',
-      region: '',
-      date1: '',
-      date2: '',
-      delivery: false,
-      type: [],
-      resource: '',
-      desc: '',
-    })
-
-    const onSubmit = () => {
-      const { name } = form
-      console.log(name)
-      console.log(toRaw(form))
-
-      ElMessage('submit!')
-    }
-    const onCancel = () => {
-      ElMessage({ message: 'cancel!', type: 'warning' })
-    }
-
-    return {
-      onSubmit,
-      onCancel,
-      form,
-    }
-  },
-}
-</script>
 
 <style scoped>
 .line {
