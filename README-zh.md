@@ -19,14 +19,14 @@ git clone https://github.com/HaitaoWang555/vue3-admin-template.git
 # 进入项目目录
 cd vue3-admin-template
 
-# 安装依赖
-npm install
+# 安装pnpm
+npm i -g pnpm
 
-# 建议不要直接使用 cnpm 安装以来，会有各种诡异的 bug。可以通过如下操作解决 npm 下载速度慢的问题
-npm install --registry=https://registry.npm.taobao.org
+# 安装依赖
+pnpm install
 
 # 启动服务
-npm run dev
+pnpm dev
 ```
 
 浏览器访问 [http://localhost:9528](http://localhost:9528)
@@ -35,26 +35,26 @@ npm run dev
 
 ```bash
 # 构建测试环境
-npm run build:stage
+pnpm build:stage
 
 # 构建生产环境
-npm run build:prod
+pnpm build:prod
 ```
 
 ## 其它
 
 ```bash
 # 预览发布环境效果
-npm run preview
+pnpm preview
 
 # 预览发布环境效果 + 静态资源分析
-npm run preview -- --report
+pnpm preview -- --report
 
 # 代码格式检查
-npm run lint
+pnpm lint
 
 # 代码格式检查并自动修复
-npm run lint -- --fix
+pnpm lint -- --fix
 ```
 
 ## License

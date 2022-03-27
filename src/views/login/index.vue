@@ -52,6 +52,7 @@
       <el-button
         :loading="loading"
         type="primary"
+        size="default"
         style="width: 100%; margin-bottom: 30px"
         @click="handleLogin"
         >Login</el-button
@@ -190,6 +191,9 @@ $cursor: #fff;
         -webkit-text-fill-color: $cursor !important;
       }
     }
+    .el-input__inner {
+      box-shadow: none;
+    }
   }
 
   .el-form-item {
@@ -256,7 +260,7 @@ $light_gray: #eee;
   .show-pwd {
     position: absolute;
     right: 10px;
-    top: 7px;
+    top: 14px;
     font-size: 16px;
     color: $dark_gray;
     cursor: pointer;

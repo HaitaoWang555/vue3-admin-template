@@ -20,11 +20,14 @@ git clone https://github.com/HaitaoWang555/vue3-admin-template.git
 # enter the project directory
 cd vue-admin-template
 
+# install pnpm
+npm i -g pnpm
+
 # install dependency
-npm install
+pnpm install
 
 # develop
-npm run dev
+pnpm dev
 ```
 
 This will automatically open http://localhost:9528
@@ -33,26 +36,26 @@ This will automatically open http://localhost:9528
 
 ```bash
 # build for test environment
-npm run build:stage
+pnpm build:stage
 
 # build for production environment
-npm run build:prod
+pnpm build:prod
 ```
 
 ## Advanced
 
 ```bash
 # preview the release environment effect
-npm run preview
+pnpm preview
 
 # preview the release environment effect + static resource analysis
-npm run preview -- --report
+pnpm preview -- --report
 
 # code format check
-npm run lint
+pnpm lint
 
 # code format check and auto fix
-npm run lint -- --fix
+pnpm lint -- --fix
 ```
 
 ## License

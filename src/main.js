@@ -12,6 +12,8 @@ import '@/styles/index.scss' // global css
 import loadElementPlus from '@/core/lazy_use'
 // use components
 import loadComponents from '@/core/use'
+// use element-plus icons
+import loadIconsComponents from '@/core/use_icon'
 // icon
 import '@/icons'
 
@@ -39,8 +41,6 @@ const app = createApp(App)
 
 loadElementPlus(app)
 loadComponents(app)
-
-// element-plus config
-app.config.globalProperties.$ELEMENT = { size: 'small', zIndex: 3000 }
+loadIconsComponents(app)
 
 app.use(router).use(store).mount('#app')

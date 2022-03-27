@@ -1,6 +1,7 @@
 'use strict'
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
+const AutoImport = require('unplugin-auto-import/webpack')
 const Components = require('unplugin-vue-components/webpack')
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 function resolve(dir) {
@@ -52,6 +53,13 @@ module.exports = {
       },
     },
     plugins: [
+      AutoImport({
+        resolvers: [
+          ElementPlusResolver({
+            importStyle: false,
+          }),
+        ],
+      }),
       Components({
         resolvers: [ElementPlusResolver()],
       }),

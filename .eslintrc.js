@@ -1,27 +1,13 @@
 module.exports = {
   root: true,
-  parserOptions: {
-    parser: 'babel-eslint',
-    sourceType: 'module',
-  },
   env: {
-    browser: true,
     node: true,
-    es6: true,
+    'vue/setup-compiler-macros': true
   },
-  extends: [
-    'plugin:vue/vue3-essential',
-    'eslint:recommended',
-    'prettier',
-    'prettier/vue',
-    'plugin:prettier/recommended',
-  ],
-  plugins: ['prettier'],
-  // add your custom rules here
-  // it is base on https://github.com/vuejs/eslint-config-vue
+  extends: ["plugin:vue/vue3-recommended", "eslint:recommended", "@vue/prettier"],
+  parser: 'vue-eslint-parser',
   rules: {
-    'vue/no-v-html': 'off',
-    'no-console': 'off',
-    'no-var': 2,
+    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
   },
-}
+};
