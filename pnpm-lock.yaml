@@ -1,7 +1,6 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@element-plus/icons-vue': ^1.1.4
   '@vue/cli-plugin-babel': ~4.5.15
   '@vue/cli-plugin-eslint': ~4.5.15
   '@vue/cli-service': ~4.5.15
@@ -23,9 +22,10 @@ specifiers:
   prettier: ^2.2.1
   sass: ^1.49.9
   sass-loader: 10.1.1
+  script-ext-html-webpack-plugin: 2.1.5
   store: ^2.0.12
   svg-sprite-loader: ^6.0.11
-  svgo: ^2.8.0
+  svgo: 1.3.2
   tailwindcss: npm:@tailwindcss/postcss7-compat@^2.2.17
   unplugin-auto-import: ^0.6.6
   unplugin-vue-components: ^0.18.4
@@ -34,7 +34,6 @@ specifiers:
   vuex: ^4.0.2
 
 dependencies:
-  '@element-plus/icons-vue': 1.1.4_vue@3.2.31
   axios: 0.26.1
   clipboard: 2.0.10
   core-js: 3.21.1
@@ -62,8 +61,9 @@ devDependencies:
   prettier: 2.6.1
   sass: 1.49.9
   sass-loader: 10.1.1_sass@1.49.9
+  script-ext-html-webpack-plugin: 2.1.5
   svg-sprite-loader: 6.0.11
-  svgo: 2.8.0
+  svgo: 1.3.2
   tailwindcss: /@tailwindcss/postcss7-compat/2.2.17
   unplugin-auto-import: 0.6.6
   unplugin-vue-components: 0.18.4_vue@3.2.31
@@ -1477,11 +1477,6 @@ packages:
       tmp: 0.2.1
     transitivePeerDependencies:
       - ts-node
-    dev: true
-
-  /@trysound/sax/0.2.0:
-    resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
-    engines: {node: '>=10.13.0'}
     dev: true
 
   /@types/body-parser/1.19.2:
@@ -3342,11 +3337,6 @@ packages:
 
   /commander/2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
-    dev: true
-
-  /commander/7.2.0:
-    resolution: {integrity: sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==}
-    engines: {node: '>= 10'}
     dev: true
 
   /commander/8.3.0:
@@ -8535,6 +8525,18 @@ packages:
       ajv-keywords: 3.5.2_ajv@6.12.6
     dev: true
 
+  /script-ext-html-webpack-plugin/2.1.5:
+    resolution: {integrity: sha512-nMjd5dtsnoB8dS+pVM9ZL4mC9O1uVtTxrDS99OGZsZxFbkZE6pw0HCMued/cncDrKivIShO9vwoyOTvsGqQHEQ==}
+    engines: {node: '>=6.11.5'}
+    peerDependencies:
+      html-webpack-plugin: ^3.0.0 || ^4.0.0
+      webpack: ^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
+    dependencies:
+      debug: 4.3.4
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /select-hose/2.0.0:
     resolution: {integrity: sha512-mEugaLK+YfkijB4fx0e6kImuJdCIt2LxCRcbEYPqRGCs4F2ogyfZU5IAZRdjCP8JPq2AtdNoC/Dux63d9Kiryg==}
     dev: true
@@ -9216,20 +9218,6 @@ packages:
       stable: 0.1.8
       unquote: 1.1.1
       util.promisify: 1.0.1
-    dev: true
-
-  /svgo/2.8.0:
-    resolution: {integrity: sha512-+N/Q9kV1+F+UeWYoSiULYo4xYSDQlTgb+ayMobAXPwMnLvop7oxKMo9OzIrX5x3eS4L4f2UHhc9axXwY8DpChg==}
-    engines: {node: '>=10.13.0'}
-    hasBin: true
-    dependencies:
-      '@trysound/sax': 0.2.0
-      commander: 7.2.0
-      css-select: 4.2.1
-      css-tree: 1.1.3
-      csso: 4.2.0
-      picocolors: 1.0.0
-      stable: 0.1.8
     dev: true
 
   /symbol-observable/1.2.0:

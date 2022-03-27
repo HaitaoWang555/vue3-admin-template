@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "ionutvmi.path-autocomplete",
+    "johnsoncodehk.volar",
+    "bradlc.vscode-tailwindcss"
+  ]
+}
