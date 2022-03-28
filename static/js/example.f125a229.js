@@ -6,3 +6,4 @@
  * Copyright(c) 2015 Tiancheng "Timothy" Gu
  * MIT Licensed
  */var r=/["'&<>]/;function a(e){var t,n=""+e,a=r.exec(n);if(!a)return n;var i="",o=0,c=0;for(o=a.index;o<n.length;o++){switch(n.charCodeAt(o)){case 34:t="&quot;";break;case 38:t="&amp;";break;case 39:t="&#39;";break;case 60:t="&lt;";break;case 62:t="&gt;";break;default:continue}c!==o&&(i+=n.substring(c,o)),c=o+1,i+=t}return c!==o?i+n.substring(c,o):i}e.exports=a}}]);
+//# sourceMappingURL=example.f125a229.js.map
