@@ -30,7 +30,7 @@ module.exports = {
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: isDev,
-  productionSourceMap: false,
+  productionSourceMap: true,
   css: {
     sourceMap: isDev,
   },

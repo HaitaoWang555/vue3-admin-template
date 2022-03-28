@@ -1,67 +1,3 @@
-<script setup>
-import path from 'path'
-import { isExternal } from '@/utils/validate'
-import Item from './base-item.vue'
-import AppLink from './sidebar-link.vue'
-import { useFixBug } from './FixiOSBug.js'
-import { ref } from 'vue'
-
-const props = defineProps({
-  // route object
-  item: {
-    type: Object,
-    required: true,
-  },
-  isNest: {
-    type: Boolean,
-    default: false,
-  },
-  basePath: {
-    type: String,
-    default: '',
-  },
-})
-
-const onlyOneChild = ref(null)
-
-const subMenu = useFixBug()
-
-const hasOneShowingChild = (children = [], parent) => {
-  const showingChildren = children.filter((item) => {
-    if (item.hidden) {
-      return false
-    } else {
-      // Temp set(will be used if only has one showing child)
-      onlyOneChild.value = item
-      return true
-    }
-  })
-
-  // When there is only one child router, the child router is displayed by default
-  if (showingChildren.length === 1) {
-    return true
-  }
-
-  // Show parent if there are no child router to display
-  if (showingChildren.length === 0) {
-    onlyOneChild.value = { ...parent, path: '', noShowingChildren: true }
-    return true
-  }
-
-  return false
-}
-
-const resolvePath = (routePath) => {
-  if (isExternal(routePath)) {
-    return routePath
-  }
-  if (isExternal(props.basePath)) {
-    return props.basePath
-  }
-  return path.resolve(props.basePath, routePath)
-}
-</script>
-
 <template>
   <div v-if="!item.hidden">
     <template
@@ -110,3 +46,79 @@ const resolvePath = (routePath) => {
     </el-sub-menu>
   </div>
 </template>
+
+<script>
+import path from 'path'
+import { isExternal } from '@/utils/validate'
+import Item from './base-item.vue'
+import AppLink from './sidebar-link.vue'
+import { useFixBug } from './FixiOSBug'
+import { ref } from 'vue'
+
+export default {
+  name: 'SidebarItem',
+  components: { Item, AppLink },
+  props: {
+    // route object
+    item: {
+      type: Object,
+      required: true,
+    },
+    isNest: {
+      type: Boolean,
+      default: false,
+    },
+    basePath: {
+      type: String,
+      default: '',
+    },
+  },
+  setup(props) {
+    const onlyOneChild = ref(null)
+
+    const subMenu = useFixBug()
+
+    const hasOneShowingChild = (children = [], parent) => {
+      const showingChildren = children.filter((item) => {
+        if (item.hidden) {
+          return false
+        } else {
+          // Temp set(will be used if only has one showing child)
+          onlyOneChild.value = item
+          return true
+        }
+      })
+
+      // When there is only one child router, the child router is displayed by default
+      if (showingChildren.length === 1) {
+        return true
+      }
+
+      // Show parent if there are no child router to display
+      if (showingChildren.length === 0) {
+        onlyOneChild.value = { ...parent, path: '', noShowingChildren: true }
+        return true
+      }
+
+      return false
+    }
+
+    const resolvePath = (routePath) => {
+      if (isExternal(routePath)) {
+        return routePath
+      }
+      if (isExternal(props.basePath)) {
+        return props.basePath
+      }
+      return path.resolve(props.basePath, routePath)
+    }
+
+    return {
+      subMenu,
+      onlyOneChild,
+      hasOneShowingChild,
+      resolvePath,
+    }
+  },
+}
+</script>
